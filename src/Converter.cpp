@@ -1,34 +1,19 @@
 #include "../inc/Converter.hpp"
 
-std::string extractFromNthDigit( int digit, std::string fullSymbol, std::string halfSymbol, std::string stepSymbol )
-{
-    if( digit == 9 ) return stepSymbol + fullSymbol;
-    if( digit == 8 ) return halfSymbol + stepSymbol + stepSymbol + stepSymbol;
-    if( digit == 7 ) return halfSymbol + stepSymbol + stepSymbol;
-    if( digit == 6 ) return halfSymbol + stepSymbol;
-    if( digit == 5 ) return halfSymbol;
-    if( digit == 4 ) return stepSymbol + halfSymbol;
-    std::string roman {""};
-    while( digit-- )
-        roman += stepSymbol;
-    return roman;
-}
+std::vector<std::vector<std::string>> extractRomanFromNthDigit {
+   { { "" }, { "I" }, { "II" }, { "III" }, { "IV" }, { "V" }, {  "VI" }, { "VII" }, { "VIII" }, { "IX" } },
+   { { "" }, { "X" }, { "XX" }, { "XXX" }, { "XL" }, { "L" }, {  "LX" }, { "LXX" }, { "LXXX" }, { "XC" } },
+   { { "" }, { "C" }, { "CC" }, { "CCC" }, { "CD" }, { "D" }, {  "DC" }, { "DCC" }, { "DCCC" }, { "CM" } },
+   { { "" }, { "M" }, { "MM" }, { "MMM" } }
+};
 
 std::string toRoman( int arabic )
 {
+    if( arabic > 3999 || 0 > arabic )
+        throw std::range_error("Cannot be represented as roman numeral.");
     std::string roman{""};
-    int index_digit = 1000;
-    int digit = arabic / index_digit;
-    while( digit-- )
-        roman += "M";
-    
-    digit = ( arabic % index_digit ) / ( index_digit / 10 );
-    index_digit /= 10;
-    roman += extractFromNthDigit( digit, { "M" }, { "D" },  { "C" } );
-    digit = ( arabic % index_digit ) / ( index_digit / 10 );
-    index_digit /= 10;
-    roman += extractFromNthDigit( digit, { "C" }, { "L" },  { "X" } );
-    digit = ( arabic % index_digit ) / ( index_digit / 10 );
-    roman += extractFromNthDigit( digit, { "X" }, { "V" },  { "I" } );
-    return roman;
+    return  extractRomanFromNthDigit [ 3 ] [ arabic        / 1000 ] +
+            extractRomanFromNthDigit [ 2 ] [ arabic % 1000 / 100  ] +
+            extractRomanFromNthDigit [ 1 ] [ arabic % 100  / 10   ] +
+            extractRomanFromNthDigit [ 0 ] [ arabic % 10          ];
 }
