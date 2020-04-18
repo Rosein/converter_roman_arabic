@@ -28,8 +28,8 @@ TEST( ToRoman, ComplexNumbers )
   EXPECT_EQ( std::string( "XIX" ), toRoman( 19 ) );
   EXPECT_EQ( std::string( "XLIX" ), toRoman( 49 ) );
   EXPECT_EQ( std::string( "XCIX" ), toRoman( 99 ) );
-  // EXPECT_EQ( std::string( "CLX" ), toRoman( 160 ) );
-  // EXPECT_EQ( std::string( "CMXCIX" ), toRoman( 999 ) );
-  // EXPECT_EQ( std::string( "MMMCMXCIX" ), toRoman( 3999 ) );
+  EXPECT_EQ( std::string( "CLX" ), toRoman( 160 ) );
+  EXPECT_EQ( std::string( "CMXCIX" ), toRoman( 999 ) );
+  EXPECT_EQ( std::string( "MMMCMXCIX" ), toRoman( 3999 ) );
 
 }
