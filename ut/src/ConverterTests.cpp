@@ -44,11 +44,16 @@ TEST( FromRoman, SingleDigit )
   EXPECT_EQ( 4  , fromRoman( "IV" ) );
   EXPECT_EQ( 5  , fromRoman( "V" ) );
   EXPECT_EQ( 6  , fromRoman( "VI" ) );
+  EXPECT_EQ( 7  , fromRoman( "VII" ) );
+  EXPECT_EQ( 8  , fromRoman( "VIII" ) );
+  EXPECT_EQ( 9  , fromRoman( "IX" ) );
 }
 
 TEST( FromRoman, ComplexNumbers )
 {
-  EXPECT_EQ( 3999, fromRoman( "MMMCMXCIX" ) ); 
+  EXPECT_EQ( 3999, fromRoman( "MMMCMXCIX" ) );
+  EXPECT_EQ( 1234, fromRoman( "MCCXXXIV" ) );
+  EXPECT_EQ( 900,  fromRoman( "CM" ) ); 
 }
 
 TEST( FromRoman, WrongNumbers )
@@ -56,6 +61,12 @@ TEST( FromRoman, WrongNumbers )
   EXPECT_FALSE( hasValidRomanDigits( "MMMK" ) );
   EXPECT_TRUE( hasValidRomanDigits( "MMM" ) );
   EXPECT_THROW( fromRoman( "MMMKMM" ), std::logic_error );
-  // EXPECT_THROW( fromRoman( "MMMMM" ), std::logic_error );
-  // EXPECT_THROW( fromRoman( "MMMKMM" ), std::logic_error );
+  EXPECT_THROW( fromRoman( "MMMM" ), std::logic_error );
+  EXPECT_THROW( fromRoman( "XM" ), std::logic_error );
+  EXPECT_THROW( fromRoman( "" ), std::logic_error );
+  EXPECT_THROW( fromRoman( "IXII" ), std::logic_error );
+  EXPECT_THROW( fromRoman( "XCX" ), std::logic_error );
+  EXPECT_THROW( fromRoman( "B" ), std::logic_error );
+  EXPECT_THROW( fromRoman( "IIIM" ), std::logic_error );
+  EXPECT_THROW( fromRoman( "VV" ), std::logic_error );
 }
