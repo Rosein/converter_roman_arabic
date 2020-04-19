@@ -1,5 +1,5 @@
 CC=gcc
-CFLAGS=-Wall -Werror
+CFLAGS=-Wall -Werror -std=c++17
 LFLAGS=-lgtest -lstdc++
 TARGET=tests
 
