@@ -56,10 +56,9 @@ TEST( FromRoman, ComplexNumbers )
   EXPECT_EQ( 900,  fromRoman( "CM" ) ); 
 }
 
+
 TEST( FromRoman, WrongNumbers )
 {
-  EXPECT_FALSE( hasValidRomanDigits( "MMMK" ) );
-  EXPECT_TRUE( hasValidRomanDigits( "MMM" ) );
   EXPECT_THROW( fromRoman( "MMMKMM" ), std::logic_error );
   EXPECT_THROW( fromRoman( "MMMM" ), std::logic_error );
   EXPECT_THROW( fromRoman( "XM" ), std::logic_error );
@@ -69,4 +68,5 @@ TEST( FromRoman, WrongNumbers )
   EXPECT_THROW( fromRoman( "B" ), std::logic_error );
   EXPECT_THROW( fromRoman( "IIIM" ), std::logic_error );
   EXPECT_THROW( fromRoman( "VV" ), std::logic_error );
+  EXPECT_THROW( fromRoman( "DM" ), std::logic_error );
 }
